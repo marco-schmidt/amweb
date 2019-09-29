@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>#{msg.pageTitle}</title>
+</head>
+
+<body>
+<h1>#{msg.pageHeading}</h1>
+  <h:form>
+	<p><h:outputLabel for="inputName" value="#{msg.labelName}"/>
+		<h:inputText id="inputName" value="#{mainBean.name}" p:placeholder="#{msg.placeholderName}"/></p>
+	<p><h:commandButton  action="#{mainBean.actionOk}" value="#{msg.buttonOk}"/></p>
+	<hr/>
+	<ui:fragment rendered="#{not empty mainBean.time}">
+	  <p><h:outputLabel value="#{msg.time} #{mainBean.time}"/></p>
+	</ui:fragment>
+	<ui:fragment rendered="#{not empty mainBean.name}">
+	  <p><h:outputLabel value="#{msg.resultName} #{mainBean.name}"/></p>
+	</ui:fragment>
+  </h:form>
+</body>
+
+</html>
