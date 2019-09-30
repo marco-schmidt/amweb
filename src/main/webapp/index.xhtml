@@ -25,6 +25,9 @@ xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 	  <p><h:outputLabel value="#{msg.resultName} #{mainBean.name}"/></p>
 	</ui:fragment>
   </h:form>
+  <ui:repeat var="vol" value="#{appState.volumes}">
+   #{vol.path}
+  </ui:repeat>
 </body>
 
 </html>

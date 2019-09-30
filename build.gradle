@@ -7,7 +7,13 @@ buildscript {
   }
 }
 
+plugins {
+  id 'com.github.jk1.dependency-license-report' version '1.11'
+  id 'org.owasp.dependencycheck' version '5.2.2'
+}
+
 repositories {
+  //mavenLocal()
   jcenter()
   mavenCentral()
 }
@@ -16,11 +22,14 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'com.bmuschko.tomcat'
+apply plugin: 'com.github.jk1.dependency-license-report'
+apply plugin: 'org.owasp.dependencycheck'
 
 description 'Asset Manager web application'
 defaultTasks 'clean', 'war', 'tomcatRun'
 
 dependencies {
+  implementation group: 'com.github.marco-schmidt', name: 'am', version: '0.0.1'
   implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
   implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
   testImplementation group: 'junit', name: 'junit', version: '4.12'
@@ -47,6 +56,31 @@ tasks.withType(JavaCompile) {
   options.warnings = true
   options.deprecation = true
   options.compilerArgs += ['-Xlint:all', '-Werror']
+}
+
+configurations.all {
+  resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+    if (details.requested.group == 'com.fasterxml.jackson.core' && details.requested.name == 'jackson-databind') {
+      details.useVersion '2.9.10'
+      details.because 'CVE-2019-16335, CVE-2019-14540'
+    }
+    if (details.requested.group == 'commons-beanutils' && details.requested.name == 'commons-beanutils') {
+      details.useVersion '1.9.4'
+      details.because 'CVE-2019-10086'
+    }
+    if (details.requested.group == 'org.apache.commons' && details.requested.name == 'commons-compress') {
+      details.useVersion '1.19'
+      details.because 'CVE-2019-12402'
+    }
+  }
+}
+
+dependencyCheck {
+  cveValidForHours=24
+  failBuildOnCVSS=0
+  analyzers {
+    assemblyEnabled=false
+  }
 }
 
 war {
