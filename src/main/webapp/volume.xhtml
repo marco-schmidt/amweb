@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<h:form id="volumeForm">
+<h:commandLink action="#{sessionState.actionNavigateToMain}" value="Back" />
+volume  #{sessionState.volume.path}
+</h:form>
+</body>
+
+</html>
