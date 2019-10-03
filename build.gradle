@@ -8,12 +8,13 @@ buildscript {
 }
 
 plugins {
+  id 'com.diffplug.gradle.spotless' version '3.24.3'
   id 'com.github.jk1.dependency-license-report' version '1.11'
+  id 'com.github.spotbugs' version '2.0.0'
   id 'org.owasp.dependencycheck' version '5.2.2'
 }
 
 repositories {
-  //mavenLocal()
   jcenter()
   mavenCentral()
 }
@@ -21,8 +22,11 @@ repositories {
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
+apply plugin: 'checkstyle'
 apply plugin: 'com.bmuschko.tomcat'
+apply plugin: 'com.diffplug.gradle.spotless'
 apply plugin: 'com.github.jk1.dependency-license-report'
+apply plugin: 'com.github.spotbugs'
 apply plugin: 'org.owasp.dependencycheck'
 
 description 'Asset Manager web application'
@@ -88,6 +92,42 @@ war {
         into('WEB-INF/classes')
     }
 }
+
+// https://github.com/checkstyle/checkstyle
+// http://checkstyle.sourceforge.net
+checkstyle {
+  toolVersion '8.24'
+  ignoreFailures false
+  showViolations true
+}
+
+// https://github.com/spotbugs/spotbugs
+spotbugs {
+  toolVersion = '3.1.12'
+  effort = 'max' // min, default, max
+  reportLevel = 'low' // low, medium, high  
+  ignoreFailures = false
+  excludeFilter = file('config/spotbugs/excludeBugsFilter.xml')
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+  reports {
+    xml.enabled = false
+    html.enabled = true
+    html.stylesheet resources.text.fromFile('config/spotbugs/report-stylesheet.xsl')
+  }
+}
+
+// https://github.com/diffplug/spotless
+spotless {
+  java {
+    licenseHeaderFile 'config/spotless/license-header.txt'
+    removeUnusedImports()
+    trimTrailingWhitespace()
+    eclipse().configFile 'config/eclipse/formatter.xml'
+  }
+}
+
 eclipse {
     jdt {
         sourceCompatibility=1.8
