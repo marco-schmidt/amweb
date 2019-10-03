@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:ui="http://java.sun.com/jsf/facelets"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>#{msg.pageTitle}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>#{msg.pageTitle}</title>
 </head>
 
 <body>
-<h1>#{msg.pageHeading}</h1>
+  <h1>#{msg.pageHeading}</h1>
   <h:form>
-  
-  <ui:fragment rendered="#{not empty appState.volumes}">
-  <h2>#{msg.volumeTableHeader}</h2>
-  <table>
-  <thead>
-  <tr>
-  <th>#{msg.volumeTableColumnPath}</th><th>#{msg.volumeTableColumnValidator}</th>
-  </tr>
-  </thead>
-  <tbody>
-  <ui:repeat var="vol" value="#{appState.volumes}">
-  <tr>
-   <td><h:outputText value="#{vol.path}"/></td>
-   <td>#{vol.validator}</td>
-   <td><h:commandButton action="#{sessionState.actionNavigateToVolume(vol)}" value="#{msg.volumeButtonVisit}"/></td>
-  </tr>
-  </ui:repeat>
-    </tbody>
-  </table>
-  
-  </ui:fragment>
-    </h:form>
-  
+    <ui:fragment rendered="#{not empty appState.volumes}">
+      <h2>#{msg.volumeTableHeader}</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>#{msg.volumeTableColumnPath}</th>
+            <th>#{msg.volumeTableColumnValidator}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ui:repeat var="vol" value="#{appState.volumes}">
+            <tr>
+              <td><h:outputText value="#{vol.path}" /></td>
+              <td><h:outputText value="#{vol.validator}" /></td>
+              <td><h:commandButton
+                  action="#{sessionState.actionNavigateToVolume(vol)}"
+                  value="#{msg.volumeButtonVisit}" /></td>
+            </tr>
+          </ui:repeat>
+        </tbody>
+      </table>
+    </ui:fragment>
+  </h:form>
 </body>
-
 </html>
