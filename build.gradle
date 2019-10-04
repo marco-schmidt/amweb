@@ -147,6 +147,11 @@ eclipse {
   }
 }
 
+licenseReport {
+  allowedLicensesFile = new File("$projectDir/config/licenseReport/allowed-licenses.json")
+}
+check.dependsOn checkLicense
+
 tomcat {
   httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
   ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
