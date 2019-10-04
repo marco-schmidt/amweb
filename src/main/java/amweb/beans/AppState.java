@@ -27,7 +27,9 @@ import javax.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import am.app.AppConfig;
+import am.app.AppConfigLoader;
 import am.app.LoggingHandler;
+import am.db.JdbcSerialization;
 import am.filesystem.model.Volume;
 
 @Named
@@ -37,7 +39,7 @@ public class AppState
 {
   private static final Logger LOGGER = LoggerFactory.getLogger(AppState.class);
   private AppConfig config;
-  private final List<Volume> volumes = new ArrayList<Volume>();
+  private List<Volume> volumes = new ArrayList<Volume>();
 
   public AppConfig getConfig()
   {
@@ -55,8 +57,21 @@ public class AppState
     config.setLocale(Locale.ENGLISH);
     final LoggingHandler log = new LoggingHandler();
     config.setLoggingHandler(log);
-    LOGGER.info("Initialization event. Server=" + payload.getServerInfo() + " Servlet API version="
+    log.initialize(config);
+    try
+    {
+      Class.forName("org.sqlite.JDBC");
+    }
+    catch (final ClassNotFoundException e)
+    {
+      LOGGER.error("Unable to access JDBC driver.", e);
+    }
+    AppConfigLoader.loadConfig(config);
+    AppConfigLoader.interpretProperties(config);
+    LOGGER.info("Initialization event. Server=" + payload.getServerInfo() + ". Servlet API version="
         + payload.getMajorVersion() + "." + payload.getMinorVersion());
+    final JdbcSerialization io = config.getDatabaseSerializer();
+    volumes = io.loadAll();
   }
 
   public List<Volume> getVolumes()

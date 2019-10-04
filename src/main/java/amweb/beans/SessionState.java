@@ -18,14 +18,19 @@ package amweb.beans;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import am.filesystem.model.Volume;
 
 @Named
 @SessionScoped
-public class SessionState implements Serializable
+public class SessionState implements Serializable, HttpSessionBindingListener
 {
   private static final long serialVersionUID = 5907105291461155384L;
   private static final Logger LOGGER = LoggerFactory.getLogger(SessionState.class);
@@ -34,10 +39,15 @@ public class SessionState implements Serializable
   private int pageIndex;
   private transient Volume volume;
 
+  @Inject
+  private transient ExternalContext ec;
+
   @PostConstruct
   public void initialize()
   {
-    LOGGER.info("Initialized session state.");
+    final HttpServletRequest request = (HttpServletRequest) ec.getRequest();
+    LOGGER.info("Initialized session state for " + ec.getSessionId(false) + " addr=" + request.getRemoteAddr());
+    ec.getSessionMap().put("sessionBindingListener", this);
     setPageIndex(PAGE_INDEX_MAIN);
   }
 
@@ -85,5 +95,16 @@ public class SessionState implements Serializable
   public void setPageIndex(int pageIndex)
   {
     this.pageIndex = pageIndex;
+  }
+
+  @Override
+  public void valueBound(HttpSessionBindingEvent event)
+  {
+  }
+
+  @Override
+  public void valueUnbound(HttpSessionBindingEvent event)
+  {
+    LOGGER.info("Session about to expire:" + event.getName() + " session=" + event.getSession().getId());
   }
 }
