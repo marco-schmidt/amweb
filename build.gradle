@@ -30,7 +30,7 @@ apply plugin: 'com.github.spotbugs'
 apply plugin: 'org.owasp.dependencycheck'
 
 description 'Asset Manager web application'
-defaultTasks 'clean', 'war', 'tomcatRun'
+defaultTasks 'clean', 'build'
 
 dependencies {
   implementation group: 'com.github.marco-schmidt', name: 'am', version: '0.0.2'
@@ -78,11 +78,12 @@ configurations.all {
 
 dependencyCheck {
   cveValidForHours=24
-  failBuildOnCVSS=0
+  failBuildOnCVSS=6.5
   analyzers {
     assemblyEnabled=false
   }
 }
+check.dependsOn dependencyCheckAnalyze
 
 war {
     from('src/main/java') {
