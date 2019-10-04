@@ -31,13 +31,14 @@ public class SessionState implements Serializable
   private static final Logger LOGGER = LoggerFactory.getLogger(SessionState.class);
   private static final int PAGE_INDEX_MAIN = 0;
   private static final int PAGE_INDEX_VOLUME = 1;
-  private transient int pageIndex;
+  private int pageIndex;
   private transient Volume volume;
 
   @PostConstruct
   public void initialize()
   {
     LOGGER.info("Initialized session state.");
+    setPageIndex(PAGE_INDEX_MAIN);
   }
 
   public boolean isMainPageRendered()
@@ -53,7 +54,7 @@ public class SessionState implements Serializable
   public String actionNavigateToMain()
   {
     setVolume(null);
-    pageIndex = PAGE_INDEX_MAIN;
+    setPageIndex(PAGE_INDEX_MAIN);
     LOGGER.info("Going to main.");
     return null;
   }
@@ -61,7 +62,7 @@ public class SessionState implements Serializable
   public String actionNavigateToVolume(Volume vol)
   {
     setVolume(vol);
-    pageIndex = PAGE_INDEX_VOLUME;
+    setPageIndex(PAGE_INDEX_VOLUME);
     LOGGER.info("Going to volume page.");
     return null;
   }
@@ -74,5 +75,15 @@ public class SessionState implements Serializable
   public void setVolume(Volume volume)
   {
     this.volume = volume;
+  }
+
+  public int getPageIndex()
+  {
+    return pageIndex;
+  }
+
+  public void setPageIndex(int pageIndex)
+  {
+    this.pageIndex = pageIndex;
   }
 }
