@@ -63,9 +63,13 @@ public class AppState
   {
     if (volumes.isEmpty())
     {
-      final Volume volume = new Volume();
+      Volume volume = new Volume();
       volume.setPath("/test/path/faked");
       volume.setValidator("TvSeriesValidator");
+      volumes.add(volume);
+      volume = new Volume();
+      volume.setPath("/another/path");
+      volume.setValidator("MovieValidator");
       volumes.add(volume);
     }
     return volumes;

@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+  <h:form id="volumesForm">
+    <h2>#{msg.volumeTableHeader}</h2>
+    <ui:fragment rendered="#{empty appState.volumes}">
+      <h:outputText value="#{msg.noVolumes}" />
+    </ui:fragment>
+    <ui:fragment rendered="#{not empty appState.volumes}">
+      <table>
+        <thead>
+          <tr>
+            <th>#{msg.volumeTableColumnPath}</th>
+            <th>#{msg.volumeTableColumnValidator}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ui:repeat var="vol" value="#{appState.volumes}">
+            <tr>
+              <td><h:outputText value="#{vol.path}" /></td>
+              <td><h:outputText value="#{vol.validator}" /></td>
+              <td><h:commandButton
+                  action="#{sessionState.actionNavigateToVolume(vol)}"
+                  value="#{msg.volumeButtonVisit}" /></td>
+            </tr>
+          </ui:repeat>
+        </tbody>
+      </table>
+    </ui:fragment>
+  </h:form>
+</ui:composition>

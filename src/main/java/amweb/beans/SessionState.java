@@ -29,6 +29,9 @@ public class SessionState implements Serializable
 {
   private static final long serialVersionUID = 5907105291461155384L;
   private static final Logger LOGGER = LoggerFactory.getLogger(SessionState.class);
+  private static final int PAGE_INDEX_MAIN = 0;
+  private static final int PAGE_INDEX_VOLUME = 1;
+  private transient int pageIndex;
   private transient Volume volume;
 
   @PostConstruct
@@ -37,20 +40,30 @@ public class SessionState implements Serializable
     LOGGER.info("Initialized session state.");
   }
 
+  public boolean isMainPageRendered()
+  {
+    return pageIndex == PAGE_INDEX_MAIN;
+  }
+
+  public boolean isVolumePageRendered()
+  {
+    return pageIndex == PAGE_INDEX_VOLUME;
+  }
+
   public String actionNavigateToMain()
   {
     setVolume(null);
-    final String dest = "index.xhtml";
-    LOGGER.info("Going to " + dest);
-    return dest;
+    pageIndex = PAGE_INDEX_MAIN;
+    LOGGER.info("Going to main.");
+    return null;
   }
 
   public String actionNavigateToVolume(Volume vol)
   {
     setVolume(vol);
-    final String dest = "volume.xhtml";
-    LOGGER.info("Going to " + dest);
-    return dest;
+    pageIndex = PAGE_INDEX_VOLUME;
+    LOGGER.info("Going to volume page.");
+    return null;
   }
 
   public Volume getVolume()

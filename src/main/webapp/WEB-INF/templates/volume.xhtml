@@ -1,0 +1,12 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+  <h:form id="volumeForm">
+    <h:commandLink action="#{sessionState.actionNavigateToMain}"
+      value="#{msg.ButtonBack}" />
+      <p><h:outputText value="#{sessionState.volume.path}"/></p>
+</h:form>
+</ui:composition>
