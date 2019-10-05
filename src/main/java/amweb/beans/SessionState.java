@@ -15,7 +15,12 @@
  */
 package amweb.beans;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -26,6 +31,7 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import am.filesystem.model.Directory;
 import am.filesystem.model.Volume;
 
 @Named
@@ -38,6 +44,8 @@ public class SessionState implements Serializable, HttpSessionBindingListener
   private static final int PAGE_INDEX_VOLUME = 1;
   private int pageIndex;
   private transient Volume volume;
+  private transient Directory dir;
+  private transient List<Directory> directories = new ArrayList<>();
 
   @Inject
   private transient ExternalContext ec;
@@ -46,7 +54,7 @@ public class SessionState implements Serializable, HttpSessionBindingListener
   public void initialize()
   {
     final HttpServletRequest request = (HttpServletRequest) ec.getRequest();
-    LOGGER.info("Initialized session state for " + ec.getSessionId(false) + " addr=" + request.getRemoteAddr());
+    LOGGER.info("Initialized session with id=" + ec.getSessionId(false) + ", IP address=" + request.getRemoteAddr());
     ec.getSessionMap().put("sessionBindingListener", this);
     setPageIndex(PAGE_INDEX_MAIN);
   }
@@ -72,9 +80,50 @@ public class SessionState implements Serializable, HttpSessionBindingListener
   public String actionNavigateToVolume(Volume vol)
   {
     setVolume(vol);
+    setDirectory(vol.getRoot());
+    directories.clear();
     setPageIndex(PAGE_INDEX_VOLUME);
     LOGGER.info("Going to volume page.");
     return null;
+  }
+
+  public String actionNavigateToBreadcrumbDirectory(Directory sub)
+  {
+    int index = directories.size() - 1;
+    while (index >= 0)
+    {
+      final Directory dir = directories.get(index);
+      if (dir == sub)
+      {
+        setDirectory(sub);
+        directories = directories.subList(0, index);
+        break;
+      }
+      else
+      {
+        index--;
+      }
+    }
+    LOGGER.info("Going to breadcrumb directory " + sub.getName());
+    return null;
+  }
+
+  public String actionNavigateToSubDirectory(Directory sub)
+  {
+    LOGGER.info("Going to subdirectory page " + sub.getName());
+    directories.add(sub);
+    setDirectory(sub);
+    return null;
+  }
+
+  private void writeObject(ObjectOutputStream stream) throws IOException
+  {
+    stream.defaultWriteObject();
+  }
+
+  private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException
+  {
+    stream.defaultReadObject();
   }
 
   public Volume getVolume()
@@ -106,5 +155,25 @@ public class SessionState implements Serializable, HttpSessionBindingListener
   public void valueUnbound(HttpSessionBindingEvent event)
   {
     LOGGER.info("Session about to expire:" + event.getName() + " session=" + event.getSession().getId());
+  }
+
+  public Directory getDirectory()
+  {
+    return dir;
+  }
+
+  public void setDirectory(Directory dir)
+  {
+    this.dir = dir;
+  }
+
+  public List<Directory> getDirectories()
+  {
+    return directories;
+  }
+
+  public void setDirectories(List<Directory> directories)
+  {
+    this.directories = directories;
   }
 }

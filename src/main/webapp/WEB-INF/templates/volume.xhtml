@@ -1,12 +1,59 @@
-<ui:composition 
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-     xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
   <h:form id="volumeForm">
-    <h:commandLink action="#{sessionState.actionNavigateToMain}"
-      value="#{msg.ButtonBack}" />
-      <p><h:outputText value="#{sessionState.volume.path}"/></p>
-</h:form>
+    <h:commandLink action="#{sessionState.actionNavigateToMain}" value="#{msg.ButtonBack}" />
+    <p>
+      <h:outputText value="#{sessionState.volume.path}" />
+      <ui:repeat var="dir" value="#{sessionState.directories}" varStatus="status">
+        &#8594;
+        <h:commandLink value=" #{dir.name}"
+          action="#{sessionState.actionNavigateToBreadcrumbDirectory(dir)}" />
+      </ui:repeat>
+    </p>
+    <ul>
+      <ui:repeat var="sub" value="#{sessionState.directory.subdirectories}">
+        <li><h:commandLink value="#{sub.name}" action="#{sessionState.actionNavigateToSubDirectory(sub)}" /></li>
+      </ui:repeat>
+    </ul>
+
+    <ui:fragment rendered="#{empty sessionState.directory.files}">
+      <h:outputText value="#{msg.noFiles}" />
+    </ui:fragment>
+
+    <ui:fragment rendered="#{not empty sessionState.directory.files}">
+      <table>
+        <thead>
+          <tr>
+            <th><h:outputText value="#{msg.fileTableName}" /></th>
+            <th><h:outputText value="#{msg.fileTableSize}" /></th>
+            <th><h:outputText value="#{msg.fileTableLastModified}" /></th>
+            <th><h:outputText value="#{msg.fileTableHashValue}" /></th>
+            <th><h:outputText value="#{msg.fileTableHashLastModified}" /></th>
+            <th><h:outputText value="#{msg.fileTableWikidata}" /></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ui:repeat var="file" value="#{sessionState.directory.files}">
+            <tr>
+              <td><h:outputText value="#{file.name}" /></td>
+              <td><h:outputText value="#{file.byteSize}">
+                </h:outputText></td>
+              <td><h:outputText value="#{file.lastModified}">
+                  <f:convertDateTime type="both" dateStyle="full" timeStyle="full" />
+                </h:outputText></td>
+              <td><h:outputText value="#{file.hashValue}" /></td>
+              <td><h:outputText value="#{file.hashCreated}" /></td>
+              <td><h:outputLink rendered="#{'?' ne file.wikidataEntityId}"
+                  value="https://www.wikidata.org/wiki/#{file.wikidataEntityId}">
+                  <h:outputText value="#{file.wikidataEntityId}" />
+                </h:outputLink></td>
+            </tr>
+          </ui:repeat>
+
+        </tbody>
+      </table>
+    </ui:fragment>
+
+  </h:form>
 </ui:composition>

@@ -11,14 +11,11 @@
 </head>
 
 <body>
-  <header>The header.</header>
-  <h1>#{msg.pageHeading}</h1>
   <ui:fragment rendered="#{sessionState.volumePageRendered}">
     <ui:include src="/WEB-INF/templates/volume.xhtml" />
   </ui:fragment>
   <ui:fragment rendered="#{sessionState.mainPageRendered}">
     <ui:include src="/WEB-INF/templates/volumes.xhtml" />
   </ui:fragment>
-  <footer>The footer.</footer>
 </body>
 </html>
