@@ -31,7 +31,10 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import am.app.AppConfig;
+import am.app.DatabaseService;
 import am.filesystem.model.Directory;
+import am.filesystem.model.File;
 import am.filesystem.model.Volume;
 
 @Named
@@ -49,6 +52,9 @@ public class SessionState implements Serializable, HttpSessionBindingListener
 
   @Inject
   private transient ExternalContext ec;
+  @Inject
+  @Named("appState")
+  private transient AppState appState;
 
   @PostConstruct
   public void initialize()
@@ -81,14 +87,36 @@ public class SessionState implements Serializable, HttpSessionBindingListener
   {
     setVolume(vol);
     setDirectory(vol.getRoot());
-    directories.clear();
+    if (directories == null)
+    {
+      directories = new ArrayList<Directory>();
+    }
+    else
+    {
+      directories.clear();
+    }
     setPageIndex(PAGE_INDEX_VOLUME);
     LOGGER.info("Going to volume page.");
     return null;
   }
 
+  public String actionSaveWikidata(File file)
+  {
+    LOGGER.info("Saving wikidata '" + file.getWikidataEntityId() + "' for file '" + file.getName() + "'.");
+    final AppConfig config = appState.getConfig();
+    new DatabaseService().updateWikidataEntityId(config, file);
+    return null;
+  }
+
   public String actionNavigateToBreadcrumbDirectory(Directory sub)
   {
+    if (volume != null && volume.getRoot() != null && sub == volume.getRoot())
+    {
+      setDirectory(volume.getRoot());
+      directories.clear();
+      LOGGER.info("Going to root directory of " + volume.getPath() + " as breadcrumb directory.");
+      return null;
+    }
     int index = directories.size() - 1;
     while (index >= 0)
     {

@@ -33,7 +33,7 @@ description 'Asset Manager web application'
 defaultTasks 'clean', 'build'
 
 dependencies {
-  implementation group: 'com.github.marco-schmidt', name: 'am', version: '0.0.2'
+  implementation group: 'com.github.marco-schmidt', name: 'am', version: '0.0.4'
   implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
   implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
   testImplementation group: 'junit', name: 'junit', version: '4.12'
@@ -157,4 +157,11 @@ tomcat {
   ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
   httpPort = 8081
   contextPath = 'am'
+}
+
+task printCache {
+  description "print absolute local paths to all dependencies"
+  doLast {
+    configurations.runtimeClasspath.each { println it }
+  }
 }
