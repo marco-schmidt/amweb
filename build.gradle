@@ -8,11 +8,11 @@ buildscript {
 }
 
 plugins {
-  id 'com.diffplug.gradle.spotless' version '3.27.1'
+  id 'com.diffplug.gradle.spotless' version '3.27.2'
   id "com.github.ben-manes.versions" version '0.28.0'
   id 'com.github.jk1.dependency-license-report' version '1.13'
-  id 'com.github.spotbugs' version '3.0.0'
-  id 'org.owasp.dependencycheck' version '5.3.0'
+  id 'com.github.spotbugs' version '4.0.2'
+  id 'org.owasp.dependencycheck' version '5.3.1'
 }
 
 repositories {
@@ -120,7 +120,7 @@ spotbugs {
   excludeFilter = file('config/spotbugs/excludeBugsFilter.xml')
 }
 
-tasks.withType(com.github.spotbugs.SpotBugsTask) {
+tasks.withType(com.github.spotbugs.snom.SpotBugsTask) {
   reports {
     xml.enabled = false
     html.enabled = true
