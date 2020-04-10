@@ -41,7 +41,7 @@ dependencies {
   implementation 'org.jboss.weld.servlet:weld-servlet-shaded:3.1.4.Final'
   compileOnly 'javax.servlet:servlet-api:2.5'
   implementation 'javax.websocket:javax.websocket-api:1.1'
-  def tomcatVersion = '9.0.33'
+  def tomcatVersion = '9.0.34'
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
