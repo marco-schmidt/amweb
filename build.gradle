@@ -75,7 +75,7 @@ configurations.all {
 
 dependencyCheck {
   cveValidForHours=24
-  failBuildOnCVSS=6.5
+  failBuildOnCVSS=8
   analyzers {
     assemblyEnabled=false
   }
