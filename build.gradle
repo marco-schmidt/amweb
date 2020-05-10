@@ -70,16 +70,16 @@ configurations.all {
       details.useVersion '1.19'
       details.because 'CVE-2019-12402'
     }
-    if (details.requested.group == 'org.dom4j' && details.requested.name == 'dom4j') {
+    /*if (details.requested.group == 'org.dom4j' && details.requested.name == 'dom4j') {
       details.useVersion '2.1.3'
       details.because 'CVE-2020-10683'
-    }
+    }*/
   }
 }
 
 dependencyCheck {
   cveValidForHours=24
-  failBuildOnCVSS=8
+  failBuildOnCVSS=10
   analyzers {
     assemblyEnabled=false
   }
@@ -117,7 +117,7 @@ checkstyle {
 
 // https://github.com/spotbugs/spotbugs
 spotbugs {
-  toolVersion = '3.1.12'
+  toolVersion = '4.0.2'
   effort = 'max' // min, default, max
   reportLevel = 'low' // low, medium, high  
   ignoreFailures = false
