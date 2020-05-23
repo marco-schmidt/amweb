@@ -1,0 +1,12 @@
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <suppress>
+        <notes><![CDATA[False positive TooTallNate/Java-WebSocket / javax.websocket]]></notes>
+        <packageUrl regex="true">^pkg:maven/jakarta\.websocket/jakarta\.websocket\-(api|client-api|all)@.*$</packageUrl>
+        <cpe>cpe:/a:java-websocket_project:java-websocket</cpe>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[False positive TooTallNate/Java-WebSocket / javax.websocket]]></notes>
+        <packageUrl regex="true">^pkg:maven/javax\.websocket/javax\.websocket\-(api|client-api|all)@.*$</packageUrl>
+        <cpe>cpe:/a:java-websocket_project:java-websocket</cpe>
+    </suppress>
+</suppressions>
