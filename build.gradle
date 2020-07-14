@@ -68,7 +68,7 @@ configurations.all {
 
 dependencyCheck {
   cveValidForHours=24
-  failBuildOnCVSS=10
+  failBuildOnCVSS=0
   suppressionFile=file('config/dependencyCheck/suppressions.xml')
   analyzers {
     assemblyEnabled=false
