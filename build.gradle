@@ -11,8 +11,8 @@ plugins {
   id 'com.diffplug.spotless' version '5.6.1'
   id "com.github.ben-manes.versions" version '0.33.0'
   id 'com.github.jk1.dependency-license-report' version '1.14'
-  id 'com.github.spotbugs' version '4.5.0'
-  id 'org.owasp.dependencycheck' version '6.0.1'
+  id 'com.github.spotbugs' version '4.5.1'
+  id 'org.owasp.dependencycheck' version '6.0.2'
 }
 
 repositories {
@@ -41,7 +41,7 @@ dependencies {
   implementation 'org.jboss.weld.servlet:weld-servlet-core:3.1.5.Final'
   compileOnly 'javax.servlet:servlet-api:2.5'
   implementation 'javax.websocket:javax.websocket-api:1.1'
-  def tomcatVersion = '9.0.38'
+  def tomcatVersion = '9.0.39'
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
