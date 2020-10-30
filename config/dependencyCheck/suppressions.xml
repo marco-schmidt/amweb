@@ -9,4 +9,18 @@
         <packageUrl regex="true">^pkg:maven/javax\.websocket/javax\.websocket\-(api|client-api|all)@.*$</packageUrl>
         <cpe>cpe:/a:java-websocket_project:java-websocket</cpe>
     </suppress>
+    <suppress until="2020-12-01Z">
+        <notes><![CDATA[
+        This suppresses a specific cve for any dependency in any directory that has the specified sha1 checksum.
+        ]]></notes>
+        <sha1>d82e926b31f06e96fccf552e41f1b8b1615d96dc</sha1>
+        <cve>CVE-2020-13943</cve>
+    </suppress>
+    <suppress until="2020-12-01Z">
+        <notes><![CDATA[
+        This suppresses a specific cve for any dependency in any directory that has the specified sha1 checksum.
+        ]]></notes>
+        <sha1>8e87969e5258f491b1dbd72d0afc6da423f391c6</sha1>
+        <cve>CVE-2020-13943</cve>
+    </suppress>
 </suppressions>
