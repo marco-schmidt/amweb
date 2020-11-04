@@ -12,7 +12,7 @@ plugins {
   id "com.github.ben-manes.versions" version '0.34.0'
   id 'com.github.jk1.dependency-license-report' version '1.16'
   id 'com.github.spotbugs' version '4.5.1'
-  id 'org.owasp.dependencycheck' version '6.0.2'
+  id 'org.owasp.dependencycheck' version '6.0.3'
 }
 
 repositories {
@@ -99,7 +99,7 @@ war {
 // https://github.com/checkstyle/checkstyle
 // http://checkstyle.sourceforge.net
 checkstyle {
-  toolVersion '8.29'
+  toolVersion '8.37'
   ignoreFailures false
   showViolations true
   configDirectory = file("${rootDir}/config/checkstyle")
@@ -107,7 +107,7 @@ checkstyle {
 
 // https://github.com/spotbugs/spotbugs
 spotbugs {
-  toolVersion = '4.0.6'
+  toolVersion = '4.1.4'
   effort = 'max' // min, default, max
   reportLevel = 'low' // low, medium, high  
   ignoreFailures = false
