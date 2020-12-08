@@ -59,6 +59,10 @@ tasks.withType(JavaCompile) {
 configurations.all {
   all*.exclude group: 'org.jboss.weld.probe'
   resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+    if (details.requested.group == 'com.fasterxml.jackson.core' && details.requested.name == 'jackson-databind') {
+      details.useVersion '2.11.0'
+      details.because 'CVE-2020-25649'
+    }
     if (details.requested.group == 'org.dom4j' && details.requested.name == 'dom4j') {
       details.useVersion '2.1.3'
       details.because 'CVE-2020-10683'
