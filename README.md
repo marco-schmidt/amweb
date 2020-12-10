@@ -1,4 +1,5 @@
-# amweb [![Travis CI](https://travis-ci.org/marco-schmidt/amweb.svg?branch=master)](https://travis-ci.org/marco-schmidt/amweb)
+# amweb [![Travis CI](https://travis-ci.org/marco-schmidt/amweb.svg?branch=master)](https://travis-ci.org/marco-schmidt/amweb) [![Java CI](https://github.com/marco-schmidt/amweb/workflows/Java%20CI/badge.svg)](https://github.com/marco-schmidt/amweb/actions?query=workflow%3A%22Java+CI%22) [![CodeQL](https://github.com/marco-schmidt/amweb/workflows/CodeQL/badge.svg)](https://github.com/marco-schmidt/amweb/actions?query=workflow%3ACodeQL)
+
 Asset manager web application
 
 * Clone amweb git repository.
