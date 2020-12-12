@@ -15,13 +15,6 @@ LABEL org.opencontainers.image.licenses="Apache-2.0"
 #   ./gradlew war
 # so that a single file build/libs/amweb-*.war exists.
 
-RUN set -eux \
-  && java -version \
-  && mkdir -p /home/am \
-  && addgroup -S am \
-  && adduser -S -G am -h /home/am am \
-  && chown -R am:am /usr/local/tomcat
-
 # labels using arguments, changing with every build
 LABEL org.opencontainers.image.created=$BUILD_DATE
 LABEL org.opencontainers.image.revision=$BUILD_REVISION
@@ -31,7 +24,5 @@ RUN rm -rf /usr/local/tomcat/webapps/ROOT \
   rm -rf /usr/local/tomcat/webapps/examples
 # copy war file into image
 COPY ./build/libs/amweb-*.war /usr/local/tomcat/webapps/ROOT.war
-
-USER am
 
 CMD ["catalina.sh", "run"]
