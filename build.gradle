@@ -63,6 +63,10 @@ configurations.all {
       details.useVersion '2.11.0'
       details.because 'CVE-2020-25649'
     }
+    if (details.requested.group == 'com.google.guava' && details.requested.name == 'guava') {
+      details.useVersion '30.0-jre'
+      details.because 'CVE-2018-10237'
+    }
     if (details.requested.group == 'org.dom4j' && details.requested.name == 'dom4j') {
       details.useVersion '2.1.3'
       details.because 'CVE-2020-10683'
