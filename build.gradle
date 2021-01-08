@@ -60,7 +60,7 @@ configurations.all {
   all*.exclude group: 'org.jboss.weld.probe'
   resolutionStrategy.eachDependency { DependencyResolveDetails details ->
     if (details.requested.group == 'com.fasterxml.jackson.core' && details.requested.name == 'jackson-databind') {
-      details.useVersion '2.11.0'
+      details.useVersion '2.11.4'
       details.because 'CVE-2020-25649'
     }
     if (details.requested.group == 'com.google.guava' && details.requested.name == 'guava') {
