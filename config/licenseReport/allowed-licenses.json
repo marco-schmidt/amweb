@@ -17,6 +17,12 @@
     {"moduleLicense": "GPL2 w/ CPE"},
     {"moduleLicense": "GNU Lesser General Public License"},
     {"moduleLicense": "MIT License"},
-    {"moduleLicense": "Public Domain"}
+    {"moduleLicense": "Public Domain"},
+    
+    {
+            "moduleLicense": null,
+            "moduleVersion": "2.12.1",
+            "moduleName": "com.fasterxml.jackson:jackson-bom"
+    }
   ]
 }
