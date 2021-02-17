@@ -18,12 +18,11 @@ package amweb.beans;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Initialized;
-import javax.enterprise.event.Observes;
-import javax.faces.annotation.FacesConfig;
-import javax.inject.Named;
-import javax.servlet.ServletContext;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Initialized;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Named;
+import jakarta.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import am.app.AppConfig;
@@ -31,6 +30,7 @@ import am.app.AppConfigLoader;
 import am.app.LoggingHandler;
 import am.db.JdbcSerialization;
 import am.filesystem.model.Volume;
+import jakarta.faces.annotation.FacesConfig;
 
 @Named
 @ApplicationScoped
