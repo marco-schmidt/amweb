@@ -1,4 +1,4 @@
-FROM tomcat:9.0-jdk8-adoptopenjdk-hotspot
+FROM tomcat:10.0-jdk8-adoptopenjdk-hotspot
 
 ARG BUILD_DATE
 ARG BUILD_REVISION
