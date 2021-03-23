@@ -38,7 +38,7 @@ dependencies {
   implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
   testImplementation group: 'junit', name: 'junit', version: '4.13.2'
   implementation 'org.glassfish:jakarta.faces:3.0.0'
-  implementation 'org.jboss.weld.servlet:weld-servlet-core:4.0.0.Final'
+  implementation 'org.jboss.weld.servlet:weld-servlet-core:4.0.1.Final'
   providedCompile 'jakarta.platform:jakarta.jakartaee-api:9.0.0'
   implementation 'javax.websocket:javax.websocket-api:1.1'
   def tomcatVersion = '10.0.4'
