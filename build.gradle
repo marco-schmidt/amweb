@@ -71,6 +71,10 @@ configurations.all {
       details.useVersion '2.1.3'
       details.because 'CVE-2020-10683'
     }
+    if (details.requested.group == 'commons-codec' && details.requested.name == 'commons-codec') {
+      details.useVersion '1.13'
+      details.because ''
+    }
     if (details.requested.group == 'org.apache.httpcomponents' && 
         (details.requested.name == 'fluent-hc' ||
          details.requested.name == 'httpclient' ||
