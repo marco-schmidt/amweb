@@ -75,6 +75,10 @@ configurations.all {
       details.useVersion '1.13'
       details.because ''
     }
+    if (details.requested.group == 'commons-io' && details.requested.name == 'commons-io') {
+      details.useVersion '2.8.0'
+      details.because 'CVE-2021-29425'
+    }
     if (details.requested.group == 'org.apache.httpcomponents' && 
         (details.requested.name == 'fluent-hc' ||
          details.requested.name == 'httpclient' ||
