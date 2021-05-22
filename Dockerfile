@@ -1,4 +1,4 @@
-FROM tomcat:10-jdk11
+FROM tomcat:10-jdk11-corretto
 
 ARG BUILD_DATE
 ARG BUILD_REVISION
