@@ -9,10 +9,10 @@ buildscript {
 
 plugins {
   id 'com.diffplug.spotless' version '5.12.5'
-  id "com.github.ben-manes.versions" version '0.38.0'
+  id "com.github.ben-manes.versions" version '0.39.0'
   id 'com.github.jk1.dependency-license-report' version '1.16'
   id 'com.github.spotbugs' version '4.7.1'
-  id 'org.owasp.dependencycheck' version '6.1.6'
+  id 'org.owasp.dependencycheck' version '6.2.0'
 }
 
 repositories {
@@ -37,7 +37,7 @@ dependencies {
   implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
   implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
   testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-  implementation 'org.glassfish:jakarta.faces:3.0.0'
+  implementation 'org.glassfish:jakarta.faces:3.0.1'
   implementation 'org.jboss.weld.servlet:weld-servlet-core:4.0.1.Final'
   providedCompile 'jakarta.platform:jakarta.jakartaee-api:9.1.0'
   implementation 'javax.websocket:javax.websocket-api:1.1'
