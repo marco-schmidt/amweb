@@ -8,9 +8,9 @@ buildscript {
 }
 
 plugins {
-  id 'com.diffplug.spotless' version '5.14.1'
+  id 'com.diffplug.spotless' version '5.14.2'
   id "com.github.ben-manes.versions" version '0.39.0'
-  id 'com.github.jk1.dependency-license-report' version '1.16'
+  id 'com.github.jk1.dependency-license-report' version '1.17'
   id 'com.github.spotbugs' version '4.7.2'
   id 'org.owasp.dependencycheck' version '6.2.2'
 }
@@ -34,11 +34,11 @@ defaultTasks 'clean', 'build'
 
 dependencies {
   implementation group: 'com.github.marco-schmidt', name: 'am', version: '0.3.0'
-  implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.31'
-  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+  implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.32'
+  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.5'
   testImplementation group: 'junit', name: 'junit', version: '4.13.2'
   implementation 'org.glassfish:jakarta.faces:3.0.1'
-  implementation 'org.jboss.weld.servlet:weld-servlet-core:4.0.1.Final'
+  implementation 'org.jboss.weld.servlet:weld-servlet-core:4.0.2.Final'
   providedCompile 'jakarta.platform:jakarta.jakartaee-api:9.1.0'
   implementation 'javax.websocket:javax.websocket-api:1.1'
   def tomcatVersion = '10.0.8'
@@ -87,6 +87,10 @@ configurations.all {
        ) {
       details.useVersion '4.5.13'
       details.because 'CVE-2020-13956'
+    }
+    if (details.requested.group == 'org.apache.commons' && details.requested.name == 'commons-compress') {
+      details.useVersion '1.21'
+      details.because 'CVE-2021-35515, CVE-2021-35516, CVE-2021-35517, CVE-2021-36090'
     }
   }
 }
