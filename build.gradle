@@ -8,11 +8,11 @@ buildscript {
 }
 
 plugins {
-  id 'com.diffplug.spotless' version '5.14.2'
+  id 'com.diffplug.spotless' version '5.15.1'
   id "com.github.ben-manes.versions" version '0.39.0'
-  id 'com.github.jk1.dependency-license-report' version '1.17'
-  id 'com.github.spotbugs' version '4.7.2'
-  id 'org.owasp.dependencycheck' version '6.2.2'
+  id 'com.github.jk1.dependency-license-report' version '2.0'
+  id 'com.github.spotbugs' version '4.7.6'
+  id 'org.owasp.dependencycheck' version '6.3.1'
 }
 
 repositories {
@@ -35,13 +35,13 @@ defaultTasks 'clean', 'build'
 dependencies {
   implementation group: 'com.github.marco-schmidt', name: 'am', version: '0.3.0'
   implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.32'
-  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.5'
+  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.6'
   testImplementation group: 'junit', name: 'junit', version: '4.13.2'
   implementation 'org.glassfish:jakarta.faces:3.0.1'
   implementation 'org.jboss.weld.servlet:weld-servlet-core:4.0.2.Final'
   providedCompile 'jakarta.platform:jakarta.jakartaee-api:9.1.0'
   implementation 'javax.websocket:javax.websocket-api:1.1'
-  def tomcatVersion = '10.0.10'
+  def tomcatVersion = '10.0.11'
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
@@ -128,7 +128,7 @@ war {
 // https://github.com/checkstyle/checkstyle
 // http://checkstyle.sourceforge.net
 checkstyle {
-  toolVersion '8.41'
+  toolVersion '9.0'
   ignoreFailures false
   showViolations true
   configDirectory = file("${rootDir}/config/checkstyle")
@@ -136,7 +136,7 @@ checkstyle {
 
 // https://github.com/spotbugs/spotbugs
 spotbugs {
-  toolVersion = '4.2.2'
+  toolVersion = '4.4.1'
   effort = 'max' // min, default, max
   reportLevel = 'low' // low, medium, high  
   ignoreFailures = false
