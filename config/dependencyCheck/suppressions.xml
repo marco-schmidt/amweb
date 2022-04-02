@@ -23,4 +23,12 @@
         <sha1>8e87969e5258f491b1dbd72d0afc6da423f391c6</sha1>
         <cve>CVE-2020-13943</cve>
     </suppress>
+    <suppress until="2022-12-01Z">
+        <notes><![CDATA[
+        This suppresses a specific cve for any dependency in any directory that has the specified sha1 checksum.
+        ]]></notes>
+        <sha1>0f6b829d392d20aeac5b3ab99210f266241444f4</sha1>
+        <cve>CVE-2021-32816</cve>
+        <cpe>cpe:2.3:a:protonmail:protonmail:0.3.0</cpe>
+    </suppress>
 </suppressions>

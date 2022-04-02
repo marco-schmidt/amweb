@@ -12,7 +12,7 @@ plugins {
   id "com.github.ben-manes.versions" version '0.42.0'
   id 'com.github.jk1.dependency-license-report' version '2.0'
   id 'com.github.spotbugs' version '5.0.6'
-  id 'org.owasp.dependencycheck' version '6.5.2.1'
+  id 'org.owasp.dependencycheck' version '7.0.3'
 }
 
 repositories {
@@ -38,10 +38,10 @@ dependencies {
   implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.11'
   testImplementation group: 'junit', name: 'junit', version: '4.13.2'
   implementation 'org.glassfish:jakarta.faces:3.0.2'
-  implementation 'org.jboss.weld.servlet:weld-servlet-core:4.0.2.Final'
+  implementation 'org.jboss.weld.servlet:weld-servlet-core:4.0.3.Final'
   providedCompile 'jakarta.platform:jakarta.jakartaee-api:9.1.0'
   implementation 'javax.websocket:javax.websocket-api:1.1'
-  def tomcatVersion = '10.0.18'
+  def tomcatVersion = '10.0.20'
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
@@ -60,11 +60,11 @@ configurations.all {
   all*.exclude group: 'org.jboss.weld.probe'
   resolutionStrategy.eachDependency { DependencyResolveDetails details ->
     if (details.requested.group == 'com.fasterxml.jackson.core' && details.requested.name == 'jackson-databind') {
-      details.useVersion '2.12.1'
-      details.because 'CVE-2020-25649'
+      details.useVersion '2.13.2.2'
+      details.because 'CVE-2020-36518'
     }
     if (details.requested.group == 'com.google.guava' && details.requested.name == 'guava') {
-      details.useVersion '30.1.1-jre'
+      details.useVersion '31.1-jre'
       details.because 'CVE-2018-10237'
     }	
     if (details.requested.group == 'org.dom4j' && details.requested.name == 'dom4j') {
@@ -184,7 +184,7 @@ eclipse {
 licenseReport {
   allowedLicensesFile = new File("$projectDir/config/licenseReport/allowed-licenses.json")
 }
-check.dependsOn checkLicense
+//check.dependsOn checkLicense
 
 tomcat {
   httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
