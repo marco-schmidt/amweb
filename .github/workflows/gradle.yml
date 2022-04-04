@@ -36,7 +36,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Gradle
-      run: ./gradlew dependencyCheckPurge check war --info --stacktrace --write-verification-metadata sha256
+      run: ./gradlew check war --info --stacktrace --write-verification-metadata sha256
     - name: Upload application package
       uses: actions/upload-artifact@v1
       with:
