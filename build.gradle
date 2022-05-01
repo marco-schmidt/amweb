@@ -12,7 +12,7 @@ plugins {
   id "com.github.ben-manes.versions" version '0.42.0'
   id 'com.github.jk1.dependency-license-report' version '2.0'
   id 'com.github.spotbugs' version '5.0.6'
-  id 'org.owasp.dependencycheck' version '7.0.3'
+  id 'org.owasp.dependencycheck' version '7.1.0.1'
 }
 
 repositories {
@@ -38,7 +38,7 @@ dependencies {
   implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.11'
   testImplementation group: 'junit', name: 'junit', version: '4.13.2'
   implementation 'org.glassfish:jakarta.faces:3.0.2'
-  implementation 'org.jboss.weld.servlet:weld-servlet-core:4.0.3.Final'
+  implementation 'org.jboss.weld.servlet:weld-servlet-core:5.0.0.Final'
   providedCompile 'jakarta.platform:jakarta.jakartaee-api:9.1.0'
   implementation 'javax.websocket:javax.websocket-api:1.1'
   def tomcatVersion = '10.0.20'
