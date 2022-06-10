@@ -37,11 +37,11 @@ dependencies {
   implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
   implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.11'
   testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-  implementation 'org.glassfish:jakarta.faces:3.0.2'
+  implementation 'org.glassfish:jakarta.faces:4.0.0'
   implementation 'org.jboss.weld.servlet:weld-servlet-core:5.0.0.Final'
   providedCompile 'jakarta.platform:jakarta.jakartaee-api:9.1.0'
   implementation 'javax.websocket:javax.websocket-api:1.1'
-  def tomcatVersion = '10.0.20'
+  def tomcatVersion = '10.0.21'
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }

@@ -18,11 +18,6 @@ package amweb.beans;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Initialized;
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Named;
-import jakarta.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import am.app.AppConfig;
@@ -30,11 +25,16 @@ import am.app.AppConfigLoader;
 import am.app.LoggingHandler;
 import am.db.JdbcSerialization;
 import am.filesystem.model.Volume;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Initialized;
+import jakarta.enterprise.event.Observes;
 import jakarta.faces.annotation.FacesConfig;
+import jakarta.inject.Named;
+import jakarta.servlet.ServletContext;
 
 @Named
 @ApplicationScoped
-@FacesConfig(version = FacesConfig.Version.JSF_2_3)
+@FacesConfig()
 public class AppState
 {
   private static final Logger LOGGER = LoggerFactory.getLogger(AppState.class);
