@@ -8,11 +8,11 @@ buildscript {
 }
 
 plugins {
-  id 'com.diffplug.spotless' version '5.17.0'
+  id 'com.diffplug.spotless' version '6.7.2'
   id "com.github.ben-manes.versions" version '0.42.0'
-  id 'com.github.jk1.dependency-license-report' version '2.0'
-  id 'com.github.spotbugs' version '5.0.6'
-  id 'org.owasp.dependencycheck' version '7.1.0.1'
+  id 'com.github.jk1.dependency-license-report' version '2.1'
+  id 'com.github.spotbugs' version '5.0.8'
+  id 'org.owasp.dependencycheck' version '7.1.1'
 }
 
 repositories {
@@ -41,7 +41,7 @@ dependencies {
   implementation 'org.jboss.weld.servlet:weld-servlet-core:5.0.0.Final'
   providedCompile 'jakarta.platform:jakarta.jakartaee-api:9.1.0'
   implementation 'javax.websocket:javax.websocket-api:1.1'
-  def tomcatVersion = '10.0.21'
+  def tomcatVersion = '10.0.22'
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
@@ -97,7 +97,7 @@ configurations.all {
 
 dependencyCheck {
   cveValidForHours=24
-  failBuildOnCVSS=0
+  failBuildOnCVSS=10
   suppressionFile=file('config/dependencyCheck/suppressions.xml')
   analyzers {
     assemblyEnabled=false
@@ -163,8 +163,8 @@ spotless {
 
 eclipse {
     jdt {
-        sourceCompatibility=1.8
-        targetCompatibility=1.8
+        sourceCompatibility=11
+        targetCompatibility=11
     }
 
   wtp {
@@ -175,7 +175,7 @@ eclipse {
 
     // https://docs.gradle.org/current/dsl/org.gradle.plugins.ide.eclipse.model.EclipseWtpFacet.html
     facet {
-            facet name: 'jst.java', version: '1.8'
+            facet name: 'jst.java', version: '11'
             facet name: 'jst.web', version: '3.0'
     }
   }
