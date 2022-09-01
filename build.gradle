@@ -8,11 +8,11 @@ buildscript {
 }
 
 plugins {
-  id 'com.diffplug.spotless' version '6.8.0'
+  id 'com.diffplug.spotless' version '6.10.0'
   id "com.github.ben-manes.versions" version '0.42.0'
   id 'com.github.jk1.dependency-license-report' version '2.1'
-  id 'com.github.spotbugs' version '5.0.9'
-  id 'org.owasp.dependencycheck' version '7.1.1'
+  id 'com.github.spotbugs' version '5.0.10'
+  id 'org.owasp.dependencycheck' version '7.1.2'
 }
 
 repositories {
@@ -41,7 +41,7 @@ dependencies {
   implementation 'org.jboss.weld.servlet:weld-servlet-core:5.0.1.Final'
   providedCompile 'jakarta.platform:jakarta.jakartaee-api:9.1.0'
   implementation 'javax.websocket:javax.websocket-api:1.1'
-  def tomcatVersion = '10.0.22'
+  def tomcatVersion = '10.0.23'
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
@@ -91,7 +91,13 @@ configurations.all {
     if (details.requested.group == 'org.apache.commons' && details.requested.name == 'commons-compress') {
       details.useVersion '1.21'
       details.because 'CVE-2021-35515, CVE-2021-35516, CVE-2021-35517, CVE-2021-36090'
+    }    
+    if (details.requested.group == 'org.xerial' &&
+        details.requested.name == 'sqlite-jdbc') {
+      details.useVersion '3.39.2.1'
+      details.because 'https://github.com/xerial/sqlite-jdbc/issues/562'
     }
+    
   }
 }
 
