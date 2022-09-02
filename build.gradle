@@ -35,7 +35,7 @@ defaultTasks 'clean', 'build'
 dependencies {
   implementation group: 'com.github.marco-schmidt', name: 'am', version: '0.3.0'
   implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
-  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.11'
+  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.0'
   testImplementation group: 'junit', name: 'junit', version: '4.13.2'
   implementation 'org.glassfish:jakarta.faces:4.0.0'
   implementation 'org.jboss.weld.servlet:weld-servlet-core:5.0.1.Final'
