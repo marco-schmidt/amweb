@@ -39,7 +39,7 @@ dependencies {
   testImplementation group: 'junit', name: 'junit', version: '4.13.2'
   implementation 'org.glassfish:jakarta.faces:4.0.0'
   implementation 'org.jboss.weld.servlet:weld-servlet-core:5.0.1.Final'
-  providedCompile 'jakarta.platform:jakarta.jakartaee-api:9.1.0'
+  providedCompile 'jakarta.platform:jakarta.jakartaee-api:10.0.0'
   implementation 'javax.websocket:javax.websocket-api:1.1'
   def tomcatVersion = '10.0.23'
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
