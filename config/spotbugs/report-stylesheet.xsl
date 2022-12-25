@@ -50,7 +50,7 @@
 <xsl:output
 	method="xml"
 	indent="yes"
-	omit-xml-declaration="yes"
+	omit-xml-declaration="no"
 	standalone="yes"
     doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 	doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
